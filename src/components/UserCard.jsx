@@ -6,15 +6,19 @@ import { useForm } from 'react-hook-form';
 const Form = ({ handleShow, createUser, UpdateUser, isUserUpdate, isEdit, UpdateEdit, setIsEdit }) => {
     const [isView, setIsView] = useState(false)
 
-    const { handleSubmit, register, reset, formState: { errors }, } = useForm();
+    const { handleSubmit, register, reset, formState: { errors } } = useForm();
 
     const submit = (data) => {
+        data.first_name = data.first_name.trim();
+        data.last_name = data.last_name.trim();
+
         if (isUserUpdate && isEdit) {
             UpdateUser(data, reset)
         } else {
             createUser(data, reset)
         }
     }
+
 
     const HandleView = () => {
         setIsView(!isView)
@@ -57,8 +61,30 @@ const Form = ({ handleShow, createUser, UpdateUser, isUserUpdate, isEdit, Update
                                 className='bg-transparent border rounded-md px-4 py-1 text-base'
                                 type="text"
                                 id='first_name'
-                                {...register("first_name", {})}
+                                {...register("first_name", {
+                                    required: {
+                                        value: true,
+                                        message: "Este campo es requerido"
+                                    },
+                                    maxLength: {
+                                        value: 15,
+                                        message: "Longitud excedida (máximo 15 caracteres)"
+                                    },
+                                    minLength: {
+                                        value: 3,
+                                        message: "Es demasiado corto el nombre"
+                                    },
+                                    validate: (value) => {
+                                        const trimValue = value.trim();
+                                        if
+                                            (!/^[a-zA-ZÀ-ÿ\u00f1\u00d1]+(\s*[a-zA-ZÀ-ÿ\u00f1\u00d1]*)*[a-zA-ZÀ-ÿ\u00f1\u00d1]+$/.test(trimValue)) {
+                                            return "Escriba solo letras";
+                                        }
+                                        return true;
+                                    }
+                                })}
                             />
+                            {errors.first_name && <p className='text-red-500'>{errors.first_name.message}</p>}
                         </div>
 
                         <div className='flex flex-col gap-1 text-[#8EFF8B] '>
@@ -69,7 +95,29 @@ const Form = ({ handleShow, createUser, UpdateUser, isUserUpdate, isEdit, Update
                                 className='bg-transparent border rounded-md px-4 py-1 text-base'
                                 type="text"
                                 id='last_name'
-                                {...register("last_name", {})} />
+                                {...register("last_name", {
+                                    required: {
+                                        value: true,
+                                        message: "Este campo es requerido"
+                                    },
+                                    maxLength: {
+                                        value: 30,
+                                        message: "Longitud excedida (máximo 15 caracteres)"
+                                    },
+                                    minLength: {
+                                        value: 5,
+                                        message: "Es demasiado corto el apellido"
+                                    },
+                                    validate: (value) => {
+                                        const trimValue = value.trim();
+                                        if
+                                            (!/^[a-zA-ZÀ-ÿ\u00f1\u00d1]+(\s*[a-zA-ZÀ-ÿ\u00f1\u00d1]*)*[a-zA-ZÀ-ÿ\u00f1\u00d1]+$/.test(trimValue)) {
+                                            return "Escriba solo letras";
+                                        }
+                                        return true;
+                                    }
+                                })} />
+                            {errors.last_name && <p className='text-red-500'>{errors.last_name.message}</p>}
                         </div>
 
                         <div className='flex flex-col gap-1 text-[#8EFF8B] '>
@@ -79,37 +127,64 @@ const Form = ({ handleShow, createUser, UpdateUser, isUserUpdate, isEdit, Update
                                 className='bg-transparent border rounded-md px-4 py-1 text-base '
                                 type="email"
                                 id='email'
-                                {...register("email", {})}
+                                {...register("email", {
+                                    required: {
+                                        value: true,
+                                        message: "Este campo es requerido"
+                                    },
+                                    pattern: {
+                                        value: /^\w+([.-_+]?\w+)*@\w+([.-]?\w+)*(\.\w{2,10})+$/,
+                                        message: "esriba un email valido"
+                                    }
+                                })}
                             />
+                            {errors.email && <p className='text-red-500'>{errors.email.message}</p>}
                         </div>
 
                         <div className='flex flex-col gap-1 text-[#8EFF8B] '>
                             <label htmlFor="password">Password</label>
                             <div className='relative'>
                                 {
-                                    isView ? 
-                                    (
-                                        <input
-                                    placeholder='Enter password'
-                                    className='bg-transparent border rounded-md px-4 py-1 text-base '
-                                    type="text"
-                                    id='password'
-                                    {...register("password", {})} />
-                                    ) : (
-                                        <input
-                                    placeholder='Enter password'
-                                    className='bg-transparent border rounded-md px-4 py-1 text-base '
-                                    type="password"
-                                    id='password'
-                                    {...register("password", {})} />
-                                    )
-
+                                    isView ?
+                                        (
+                                            <input
+                                                placeholder='Enter password'
+                                                className='bg-transparent border rounded-md px-4 py-1 text-base '
+                                                type="text"
+                                                id='password'
+                                                {...register("password", {
+                                                    required: {
+                                                        value: true,
+                                                        message: "Este campo es requerido"
+                                                    },
+                                                    pattern: {
+                                                        value: /^(?=.*\d)(?=.*[!@#$%^&*])(?=.*[a-z])(?=.*[A-Z]).{8,}$/,
+                                                        message: "esriba una contraseña fuerte"
+                                                    }
+                                                })} />
+                                        ) : (
+                                            <input
+                                                placeholder='Enter password'
+                                                className='bg-transparent border rounded-md px-4 py-1 text-base '
+                                                type="password"
+                                                id='password'
+                                                {...register("password", {
+                                                    required: {
+                                                        value: true,
+                                                        message: "Este campo es requerido"
+                                                    },
+                                                    pattern: {
+                                                        value: /^(?=.*\d)(?=.*[!@#$%^&*])(?=.*[a-z])(?=.*[A-Z]).{8,}$/,
+                                                        message: "esriba una contraseña fuerte"
+                                                    }
+                                                })} />
+                                        )
                                 }
-                                
+                                {errors.password && <p className='text-red-500'>{errors.password.message}</p>}
                                 {
                                     isView ?
                                         (<button
-                                        type='button'
+                                            type='button'
                                             onClick={HandleView}
                                             className=' absolute top-[3px] right-1 h-[28px] w-[30px] 
                                             bx bxs-low-vision text-xl
@@ -136,7 +211,13 @@ const Form = ({ handleShow, createUser, UpdateUser, isUserUpdate, isEdit, Update
                                 className='bg-transparent border rounded-md px-4 py-1 text-base '
                                 type="date"
                                 id='birthday'
-                                {...register("birthday", {})} />
+                                {...register("birthday", {
+                                    required: {
+                                        value: true,
+                                        message: "Este campo es requerido"
+                                    },
+                                })} />
+                            {errors.birthday && <p className='text-red-500'>{errors.birthday.message}</p>}
                         </div>
                     </section>
 
