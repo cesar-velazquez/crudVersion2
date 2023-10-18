@@ -5,12 +5,12 @@ const Inicio = ({ handleShow, showUser, deleteUser, handleUpdate }) => {
     return (
         <main
             className="bg-[#101010] min-h-screen font-Lato
-            bg-[url(/imgs/Ellipsev.png)] bg-right-bottom bg-no-repeat
-            
-            ">
-            <div
-                className="bg-[url(imgs/Ellipsem.png)] bg-left-bottom bg-no-repeat min-h-screen "
+            bg-[url(/imgs/Ellipsev.png)] bg-right-bottom bg-no-repeat">
+            <div 
+            style={{ backgroundImage: 'url("/imgs/Ellipsem.png")' }} 
+            className="bg-left-bottom bg-no-repeat min-h-screen "
             >
+
                 <h1 className="text-[#8EFF8B] text-2xl text-center pt-14 font-semibold ">
                     List of user
                 </h1>
