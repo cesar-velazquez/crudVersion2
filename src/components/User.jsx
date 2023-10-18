@@ -19,7 +19,8 @@ const User = ({ userlist, deleteUser, handleUpdate }) => {
 
                     <i
                         onClick={handleDelete}
-                        className='bx bxs-trash bg-red-600 p-2 rounded-md cursor-pointer'></i>
+                        className='bx bxs-trash bg-red-600 p-2 rounded-md cursor-pointer
+                        hover:bg-[#ff4e4e] transition-colors duration-500 '></i>
                     {
                         isDelete &&
                         (
@@ -31,7 +32,8 @@ const User = ({ userlist, deleteUser, handleUpdate }) => {
                                         <button
                                             onClick={handleDelete}
                                             className='bg-[#D85D5D] 
-                                    w-[20px] h-[20px] aspect-square flex justify-center items-center rounded-full' >X</button>
+                                    w-[20px] h-[20px] aspect-square flex justify-center items-center rounded-full
+                                    hover:bg-[#ff4e4e] transition-colors duration-500' >X</button>
                                     </div>
 
                                     <div className='w-[70px] aspect-square
@@ -48,10 +50,13 @@ const User = ({ userlist, deleteUser, handleUpdate }) => {
                                         <div className='flex flex-col gap-2'>
                                             <button
                                                 onClick={() => deleteUser(userlist.id)}
-                                                className='bg-[#D85D5D] px-4 text-base w-[150px] flex m-auto justify-center items-center text-center '>Yes, delete</button>
+                                                className='bg-[#D85D5D] px-4 text-base w-[150px] flex m-auto justify-center 
+                                                items-center text-center 
+                                                hover:bg-[#ff4e4e] transition-colors duration-500'>Yes, delete</button>
                                             <button
                                             onClick={handleDelete}
-                                                className='text-[#CBFFD9]'>or cancel
+                                                className='text-[#CBFFD9] hover:scale-105 w-[150px] flex justify-center m-auto text-center 
+                                                '>or cancel
                                                 </button>
                                         </div>
                                     </div>
@@ -63,7 +68,8 @@ const User = ({ userlist, deleteUser, handleUpdate }) => {
                         {/* boton para editar -------------------------------------------- */}
                     <button
                         onClick={() => handleUpdate(userlist)}
-                        className='bx bxs-edit-alt bg-white text-black p-2 rounded-md'>
+                        className='bx bxs-edit-alt bg-white text-black p-2 rounded-md
+                        hover:bg-white/30 transition-colors duration-700 '>
                     </button>
                     {/* boton para editar -------------------------------------------- */}
 

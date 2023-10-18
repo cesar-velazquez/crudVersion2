@@ -148,9 +148,10 @@ const Form = ({ handleShow, createUser, UpdateUser, isUserUpdate, isEdit, Update
                                 <button
                                     type='button'
                                     onClick={UpdateEdit}
-                                    className='bg-[#CBFFDA] w-[80%] rounded-md m-auto text-[#302F2F] '>Save Changes</button>
+                                    className='bg-[#CBFFDA] w-[80%] rounded-md m-auto text-[#302F2F]
+                                    hover:bg-[#57ff87] transition-colors duration-500 '>Save Changes</button>
                                 :
-                                <button className='bg-[#CBFFDA] w-[80%] rounded-md m-auto text-[#302F2F] '>
+                                <button className='bg-[#CBFFDA] w-[80%] rounded-md m-auto text-[#302F2F]'>
                                     Save User</button>
                         }
 
@@ -166,7 +167,8 @@ const Form = ({ handleShow, createUser, UpdateUser, isUserUpdate, isEdit, Update
                                                     onClick={handleCancelEdit}
                                                     className='bg-[#8EFF8B] 
                                     w-[20px] h-[20px] aspect-square flex justify-center
-                                    items-center rounded-full font-bold' >X</button>
+                                    items-center rounded-full font-bold 
+                                    hover:bg-[#bcf5ba] transition-colors duration-700' >X</button>
                                             </div>
 
                                             <div className='w-[70px] aspect-square
@@ -180,15 +182,17 @@ const Form = ({ handleShow, createUser, UpdateUser, isUserUpdate, isEdit, Update
                                                 <div className='m-auto'>
                                                     <p className='text-center text-white '>Are you sure you want to edit this user?</p>
                                                 </div>
-                                                <div className='flex flex-col gap-2'>
+                                                <div className='flex flex-col gap-4'>
                                                     <button
                                                         className='bg-[#8EFF8B] px-4 text-base w-[150px] 
-                                                    flex m-auto justify-center items-center text-center '>
+                                                    flex m-auto justify-center items-center text-center 
+                                                    hover:bg-[#bcf5ba] transition-colors duration-700 '>
                                                         Yes, edit</button>
                                                     <button
                                                         onClick={handleCancelEdit}
                                                         // onClick={handleShow}
-                                                        className='text-[#8EFF8B]'>or cancel edit
+                                                        className='text-[#8EFF8B]
+                                                        hover:scale-105 flex m-auto justify-center w-[150px] '>or cancel edit
                                                     </button>
                                                 </div>
                                             </div>
@@ -204,7 +208,8 @@ const Form = ({ handleShow, createUser, UpdateUser, isUserUpdate, isEdit, Update
 
                         <button
                             onClick={handleShow}
-                            className='text-[#CBFFD9] text-base '>or cancel</button>
+                            className='text-[#CBFFD9] text-base
+                            hover:scale-105 w-[80%] flex m-auto justify-center '>or cancel</button>
                     </section>
 
                 </form>
